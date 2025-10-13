@@ -43,6 +43,7 @@
     .card:hover{transform:translateY(-6px);box-shadow:0 18px 52px rgba(31,48,98,0.12);}
     .imgbox{position:relative;width:100%;aspect-ratio:1;border:none;overflow:hidden}
     .imgbox img{width:100%;height:100%;object-fit:cover;display:block}
+    .card.gifted .imgbox img{opacity:0.35}
     .content{padding:22px;display:grid;gap:14px}
     .title{font-weight:650;font-size:1.15rem;line-height:1.25}
     .price{color:var(--brand);font-weight:700;font-size:1.1rem}
@@ -52,6 +53,8 @@
     .wpp:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(63,94,251,0.28)}
     .wpp:active{transform:translateY(0);box-shadow:0 8px 20px rgba(63,94,251,0.2);background:linear-gradient(135deg,var(--brand-pressed),#5b3fd1)}
     .small{color:var(--muted);font-size:.96rem;line-height:1.35}
+    .card.gifted .actions{justify-items:center;text-align:center}
+    .card.gifted .thanks{color:var(--muted);font-size:1rem;line-height:1.4;font-weight:600}
     footer{margin:56px auto 0;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
       padding:28px;display:grid;gap:24px;align-items:center;text-align:center}
     .payment-options{display:grid;gap:18px}
@@ -136,7 +139,7 @@ Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 
       { id:'sofa', nome:'Sofá Retrátil Cinza', preco:1290.00, img:'images/sofa.jpg', small:'Nosso cantinho da sala vai ficar ainda mais aconchegante para receber todo mundo com conforto.' },
       { id:'tv', nome:'Smart TV 65" 4K', preco:2990.00, img:'images/TV.jpg', small:'Filmes, séries e jogos com imagem perfeita para aproveitar noites especiais juntinhos.' },
       { id:'rack', nome:'Rack Minimalista de Madeira', preco:780.00, img:'images/rack.jpg', small:'Organização e estilo para a sala, deixando tudo no lugar e com um toque acolhedor.' },
-      { id:'cafeteira', nome:'Cafeteira Espresso Inox', preco:420.00, img:'images/cafeteira.jpg', small:'Café sempre fresquinho para receber os amigos e curtir momentos a dois com aroma especial.' },
+      { id:'cafeteira', nome:'Cafeteira Espresso Inox', preco:420.00, img:'images/cafeteira.jpg', gifted:true, giftedBy:'Gabriel e Maria', giftedThanks:'Muito obrigado pelo presente cheio de carinho! 💛' },
       { id:'xicara', nome:'Conjunto de Xícaras de Café', preco:150.00, img:'images/xicara.jpg', small:'Um convite a muitas conversas gostosas com café quentinho e companhia querida.' },
       { id:'kit', nome:'Kit de Ferramentas Completo', preco:280.00, img:'images/Kit-Ferramenta.jpg', small:'Perfeito para montar, ajustar e construir nossos sonhos a dois com a casa novinha.' },
       { id:'abajur', nome:'Abajures Modernos', preco:90.00, img:'images/abajures.jpg', small:'Luz suave para deixar os momentos da noite ainda mais especiais e cheios de charme.' },
@@ -164,10 +167,18 @@ Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 
         : `Valor do presente: ${money(item.preco)}.`;
       const message = `${baseMessage}\n${priceMessage}`;
       const helperText = item.small ?? `“Olá! Quero presentear vocês com o <strong>${item.nome}</strong> como forma de carinho.”`;
+      const isGifted = Boolean(item.gifted);
+      const thanksMessage = isGifted
+        ? `<div class="thanks">Presente dado por <strong>${item.giftedBy}</strong>. ${item.giftedThanks}</div>`
+        : '';
       const payload = { ...item, mensagemFinal: message };
 
       const li = document.createElement('article');
-      li.className = 'card';
+      li.className = `card${isGifted ? ' gifted' : ''}`;
+      const actions = isGifted
+        ? thanksMessage
+        : `<button class="wpp" data-item='${JSON.stringify(payload)}'>${buttonLabel}</button>
+           <div class="small">${helperText}</div>`;
       li.innerHTML = `
         <div class="imgbox">
           <img src="${item.img}" alt="${item.nome}" loading="lazy" decoding="async">
@@ -175,10 +186,7 @@ Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 
         <div class="content">
           <div class="title">${item.nome}</div>
           <div class="price">${priceLabel}</div>
-          <div class="actions">
-            <button class="wpp" data-item='${JSON.stringify(payload)}'>${buttonLabel}</button>
-            <div class="small">${helperText}</div>
-          </div>
+          <div class="actions">${actions}</div>
         </div>
       `;
       grid.appendChild(li);
