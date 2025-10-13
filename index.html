@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nossa Lista de Presentes 💛</title>
+  <meta name="description" content="Cada presente deixa nossa casa mais completa. Obrigado por fazer parte!">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💛</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f6f8;
+      --card:#ffffff;
+      --text:#1f1f20;
+      --muted:#5e6470;
+      --brand:#3f5efb;
+      --brand-pressed:#324acc;
+      --radius:22px;
+      --shadow:0 14px 40px rgba(31,48,98,0.08);
+      --gap:28px;
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Quicksand",sans-serif;line-height:1.5}
+    a{color:inherit}
+    .wrap{max-width:var(--maxw);margin:auto;padding:32px 32px 48px}
+    header{display:grid;gap:24px;justify-items:center;text-align:center;padding:12px 0 48px}
+    header .intro{display:grid;gap:16px;justify-items:center}
+    header h1{margin:0;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.02em}
+    .cursive{font-family:"Quicksand",sans-serif;letter-spacing:-0.01em}
+    header p{margin:0;color:var(--muted);max-width:720px;font-size:1.05rem}
+    .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(3,1fr)}
+    @media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:720px){.grid{grid-template-columns:1fr;}.wrap{padding:28px 22px 40px}}
+    @media(min-width:960px){
+      header{max-width:760px;margin:0 auto;}
+    }
+    .card{background:var(--card);border:none;border-radius:var(--radius);box-shadow:var(--shadow);
+      overflow:hidden;display:flex;flex-direction:column;gap:0;transition:transform .2s ease,box-shadow .2s ease;
+      backdrop-filter:blur(12px);}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 52px rgba(31,48,98,0.12);}
+    .imgbox{position:relative;width:100%;aspect-ratio:1;border:none;overflow:hidden}
+    .imgbox img{width:100%;height:100%;object-fit:cover;display:block}
+    .content{padding:22px;display:grid;gap:14px}
+    .title{font-weight:650;font-size:1.15rem;line-height:1.25}
+    .price{color:var(--brand);font-weight:700;font-size:1.1rem}
+    .actions{display:grid;gap:12px}
+    .wpp{appearance:none;border:0;background:linear-gradient(135deg,var(--brand),#7f53ff);color:#fff;padding:14px 18px;border-radius:16px;
+      font-weight:650;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 10px 25px rgba(63,94,251,0.25)}
+    .wpp:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(63,94,251,0.28)}
+    .wpp:active{transform:translateY(0);box-shadow:0 8px 20px rgba(63,94,251,0.2);background:linear-gradient(135deg,var(--brand-pressed),#5b3fd1)}
+    .small{color:var(--muted);font-size:.96rem;line-height:1.35}
+    footer{margin:56px auto 0;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:28px;display:grid;gap:24px;align-items:center;text-align:center}
+    .payment-options{display:grid;gap:18px}
+    .payment-option{display:grid;gap:12px;justify-items:center}
+    .pixline{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center}
+    @media(min-width:720px){
+      .payment-options{grid-template-columns:repeat(2,1fr);align-items:start;text-align:left}
+      .payment-option{justify-items:flex-start;text-align:left}
+      footer{text-align:left}
+    }
+    .copy{padding:12px 18px;border-radius:16px;border:0;background:#eef1ff;color:var(--brand);cursor:pointer;font-weight:600;
+      transition:transform .2s ease,box-shadow .2s ease}
+    .copy:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(63,94,251,0.18)}
+    .muted{color:var(--muted)}
+    .note{margin:36px auto 0;text-align:center;color:var(--muted);font-size:1rem;max-width:760px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="intro">
+        <h1 class="cursive">Nosso cantinho, com a sua ajuda </h1>
+        <p>Cada detalhe representa um pedacinho do nosso lar. Escolha um presente e faça parte dessa história!</p>
+      </div>
+    </header>
+
+    <section aria-label="Lista de presentes">
+      <div id="grid" class="grid" role="list"></div>
+    </section>
+
+    <p class="note"><strong>Observação:</strong> Os valores são simbólicos para presente via Pix. Escolha o item que desejar e nos avise no privado para removê-lo da lista.</p>
+
+    <footer aria-label="Formas de presente">
+      <div class="payment-options">
+        <section class="payment-option" aria-label="Pagamento por Pix">
+          <h2 style="margin:0;font-size:1.35rem;font-weight:650">Pix</h2>
+          <div class="pixline">
+            <span id="pixKey" style="font-size:1.05rem;font-weight:600">073.895.551-57</span>
+            <button class="copy" id="copyPix">Copiar chave Pix</button>
+          </div>
+        </section>
+        <section class="payment-option" aria-label="Pagamento por cartão de crédito">
+          <h2 style="margin:0;font-size:1.35rem;font-weight:650">Cartão de Crédito</h2>
+          <p class="muted" style="margin:0">Prefere presentear com o cartão? É só nos chamar para solicitar o link com o valor que desejar.</p>
+          <button class="wpp" id="requestCardLink" type="button">Pedir link aos noivos</button>
+        </section>
+      </div>
+      <p class="muted" style="margin:4px 0 0">Depois de enviar, você pode nos mandar o comprovante pelo WhatsApp. Obrigado por fazer parte da nossa história!
+Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 🎁</p>
+    </footer>
+  </div>
+
+  <script>
+    const WHATSAPP_NUMBER = '5565992790699';
+    const PIX_KEY = '073.895.551-57';
+
+    const itens = [
+      {
+        id:'lua-de-mel',
+        nome:'Operação Lua de Mel',
+        preco:50.00,
+        precoTipo:'minimo',
+        img:'images/operacao-luademel.png',
+        cta:'Contribuir',
+        mensagem:'Olá! Quero contribuir com a Operação Lua de Mel com um valor a combinar. 💝',
+        small:'Contribua com o valor que desejar a partir de R$ 50,00 para tornar nossa viagem inesquecível.'
+      },
+      {
+        id:'kit-churrasco',
+        nome:'Kit de Churrasco',
+        preco:79.00,
+        img:'images/kit-churrasco.png',
+        small:'Perfeito para reunir a família no nosso novo lar. Obrigado por aquecer nossos encontros!'
+      },
+      {
+        id:'vasos',
+        nome:'Vasos Decorativos',
+        preco:69.00,
+        img:'images/vaso-decorativo.png',
+        small:'Um toque de verde e carinho para deixar nossa casa mais viva e acolhedora.'
+      },
+      { id:'sofa', nome:'Sofá Retrátil Cinza', preco:1290.00, img:'images/sofa.jpg', small:'Nosso cantinho da sala vai ficar ainda mais aconchegante para receber todo mundo com conforto.' },
+      { id:'tv', nome:'Smart TV 65" 4K', preco:2990.00, img:'images/TV.jpg', small:'Filmes, séries e jogos com imagem perfeita para aproveitar noites especiais juntinhos.' },
+      { id:'rack', nome:'Rack Minimalista de Madeira', preco:780.00, img:'images/rack.jpg', small:'Organização e estilo para a sala, deixando tudo no lugar e com um toque acolhedor.' },
+      { id:'cafeteira', nome:'Cafeteira Espresso Inox', preco:420.00, img:'images/cafeteira.jpg', small:'Café sempre fresquinho para receber os amigos e curtir momentos a dois com aroma especial.' },
+      { id:'xicara', nome:'Conjunto de Xícaras de Café', preco:150.00, img:'images/xicara.jpg', small:'Um convite a muitas conversas gostosas com café quentinho e companhia querida.' },
+      { id:'kit', nome:'Kit de Ferramentas Completo', preco:280.00, img:'images/Kit-Ferramenta.jpg', small:'Perfeito para montar, ajustar e construir nossos sonhos a dois com a casa novinha.' },
+      { id:'abajur', nome:'Abajures Modernos', preco:90.00, img:'images/abajures.jpg', small:'Luz suave para deixar os momentos da noite ainda mais especiais e cheios de charme.' },
+      { id:'aspirador', nome:'Aspirador de Pó Robô', preco:1250.00, img:'images/aspirador-de-pó-robo.jpg', small:'Praticidade total para manter a casa limpinha enquanto curtimos o tempo juntos.' },
+      { id:'lava', nome:'Lava-louças Inox 14 Serviços', preco:3540.00, img:'images/lava-louca.jpg', small:'Ajuda extra no dia a dia para sobrar mais tempo para curtir a vida a dois.' },
+      { id:'ferro', nome:'Ferro a Vapor', preco:220.00, img:'images/ferro-de-passar.jpg', small:'Roupas sempre impecáveis com carinho e praticidade nas tarefas de casa.' },
+      { id:'cama', nome:'Jogo de Cama Queen 4 Peças', preco:390.00, img:'images/jogo-cama.jpg', small:'Maciez e aconchego para descansar juntinhos e repor as energias com muito amor.' },
+      { id:'cabeceira', nome:'Cabeceira Queen Estofada', preco:870.00, img:'images/cabeceira-queen.jpg', small:'Um toque de elegância e conforto para completar nosso cantinho de descanso.' },
+      { id:'mesa', nome:'Mesa de escritório', preco:580.00, img:'images/mesa.png', small:'Espaço perfeito para trabalhar e planejar nossos próximos passos com foco e carinho.' },
+      { id:'panela', nome:'Panela Elétrica de Arroz', preco:260.00, img:'images/panela-eletrica-de-arroz.jpg', small:'Praticidade na cozinha para preparar refeições deliciosas em poucos minutos.' },
+      { id:'fogao', nome:'Fogão 5 bocas com Forno', preco:1350.00, img:'images/fogao-5-boca.jpg', small:'Coração da cozinha para preparar refeições especiais com muito amor.' }
+    ];
+
+    const grid = document.getElementById('grid');
+    const money = v => v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+
+    itens.forEach(item => {
+      const priceLabel = item.precoTipo === 'minimo'
+        ? `A partir de ${money(item.preco)}`
+        : money(item.preco);
+      const buttonLabel = item.cta ?? 'Presentear';
+      const baseMessage = item.mensagem ?? `Olá! Quero presentear vocês com o ${item.nome} como forma de carinho.`;
+      const priceMessage = item.precoTipo === 'minimo'
+        ? `Valor sugerido a partir de ${money(item.preco)}.`
+        : `Valor do presente: ${money(item.preco)}.`;
+      const message = `${baseMessage}\n${priceMessage}`;
+      const helperText = item.small ?? `“Olá! Quero presentear vocês com o <strong>${item.nome}</strong> como forma de carinho.”`;
+      const payload = { ...item, mensagemFinal: message };
+
+      const li = document.createElement('article');
+      li.className = 'card';
+      li.innerHTML = `
+        <div class="imgbox">
+          <img src="${item.img}" alt="${item.nome}" loading="lazy" decoding="async">
+        </div>
+        <div class="content">
+          <div class="title">${item.nome}</div>
+          <div class="price">${priceLabel}</div>
+          <div class="actions">
+            <button class="wpp" data-item='${JSON.stringify(payload)}'>${buttonLabel}</button>
+            <div class="small">${helperText}</div>
+          </div>
+        </div>
+      `;
+      grid.appendChild(li);
+    });
+
+    // botão WhatsApp
+    grid.addEventListener('click', (ev)=>{
+      const btn = ev.target.closest('.wpp');
+      if(!btn) return;
+      const item = JSON.parse(btn.dataset.item);
+      const msg = item.mensagemFinal ?? `Olá! Quero presentear vocês com o ${item.nome} como forma de carinho.`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank', 'noopener');
+    });
+
+    // copiar Pix
+    document.getElementById('copyPix').addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(PIX_KEY);
+        const btn = document.getElementById('copyPix');
+        const old = btn.textContent;
+        btn.textContent = 'Copiado! ✅';
+        setTimeout(()=>btn.textContent = old, 1600);
+      }catch(e){
+        alert('Não foi possível copiar. Copie manualmente: ' + PIX_KEY);
+      }
+    });
+
+    document.getElementById('requestCardLink').addEventListener('click', ()=>{
+      const msg = 'Olá! Gostaria de solicitar o link para presentear com cartão de crédito no valor que eu escolher.';
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank', 'noopener');
+    });
+  </script>
+</body>
+</html>
