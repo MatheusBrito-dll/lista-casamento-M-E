@@ -70,6 +70,18 @@
     .copy:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(63,94,251,0.18)}
     .muted{color:var(--muted)}
     .note{margin:36px auto 0;text-align:center;color:var(--muted);font-size:1rem;max-width:760px}
+    body.modal-open{overflow:hidden}
+    .modal{position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:rgba(22,26,39,0.55);
+      backdrop-filter:blur(6px);z-index:999}
+    .modal[hidden]{display:none}
+    .modal__card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 28px;max-width:420px;
+      width:min(100%,420px);display:grid;gap:18px;justify-items:center;text-align:center;position:relative}
+    .modal__close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-weight:600;
+      cursor:pointer;font-size:0.95rem}
+    .modal__title{margin:0;font-size:1.35rem;font-weight:650}
+    .modal__img{width:100%;border-radius:18px;box-shadow:0 18px 40px rgba(31,48,98,0.16)}
+    .modal__actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
+    .modal__text{margin:0;color:var(--muted)}
   </style>
 </head>
 <body>
@@ -107,9 +119,39 @@ Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 
     </footer>
   </div>
 
+  <div id="pixModal" class="modal" hidden>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="pixModalTitle">
+      <button type="button" class="modal__close" id="closePixModal" aria-label="Fechar janela">✕</button>
+      <h3 id="pixModalTitle" class="modal__title">Contribua com a Operação Lua de Mel</h3>
+      <p class="modal__text">Escaneie o QR Code ou copie nossa chave Pix para enviar o presente com o valor que preferir.</p>
+      <img class="modal__img" src="images/Pix-qrcode.png" alt="QR Code Pix para contribuição com a Operação Lua de Mel" loading="lazy" decoding="async">
+      <div class="modal__actions">
+        <button class="copy" type="button" id="copyPixFromModal">Copiar chave Pix</button>
+        <button class="wpp" type="button" id="whatsappPixModal">Avisar no WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const WHATSAPP_NUMBER = '5565992790699';
     const PIX_KEY = '073.895.551-57';
+
+    const openWhatsApp = (message) => {
+      const msg = message ?? 'Olá! Quero presentear vocês com muito carinho.';
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank', 'noopener');
+    };
+
+    const copyPixToClipboard = async (button) => {
+      try {
+        await navigator.clipboard.writeText(PIX_KEY);
+        const old = button.textContent;
+        button.textContent = 'Copiado! ✅';
+        setTimeout(() => button.textContent = old, 1600);
+      } catch (e) {
+        alert('Não foi possível copiar. Copie manualmente: ' + PIX_KEY);
+      }
+    };
 
     const itens = [
       {
@@ -121,16 +163,6 @@ Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 
         cta:'Contribuir',
         mensagem:'Olá! Quero contribuir com a Operação Lua de Mel com um valor a combinar. 💝',
         small:'Contribua com o valor que desejar a partir de R$ 50,00 para tornar nossa viagem inesquecível.'
-      },
-      {
-        id:'pix-qr',
-        nome:'Contribuição via Pix (QR Code)',
-        preco:50.00,
-        precoTipo:'minimo',
-        img:'images/Pix-qrcode.png',
-        cta:'Presentear via Pix',
-        mensagem:'Olá! Acabei de contribuir com vocês via Pix usando o QR Code. 💛',
-        small:'Escaneie o QR Code com o app do banco para contribuir com o valor que preferir e nos avise para confirmarmos o recebimento.'
       },
       {
         id:'kit-churrasco',
@@ -177,7 +209,53 @@ Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 
       
 
     const grid = document.getElementById('grid');
+    const pixModal = document.getElementById('pixModal');
+    const closePixModalBtn = document.getElementById('closePixModal');
+    const copyPixFromModalBtn = document.getElementById('copyPixFromModal');
+    const whatsappPixModalBtn = document.getElementById('whatsappPixModal');
+    const copyPixFooterBtn = document.getElementById('copyPix');
+    let pixModalMessage = null;
+
     const money = v => v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+
+    const openPixModal = (message) => {
+      pixModalMessage = message;
+      pixModal.removeAttribute('hidden');
+      document.body.classList.add('modal-open');
+      closePixModalBtn.focus();
+    };
+
+    const closePixModal = () => {
+      pixModal.setAttribute('hidden', '');
+      document.body.classList.remove('modal-open');
+      pixModalMessage = null;
+    };
+
+    pixModal.addEventListener('click', (event) => {
+      if (event.target === pixModal) {
+        closePixModal();
+      }
+    });
+
+    closePixModalBtn.addEventListener('click', closePixModal);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !pixModal.hasAttribute('hidden')) {
+        closePixModal();
+      }
+    });
+
+    copyPixFromModalBtn.addEventListener('click', () => copyPixToClipboard(copyPixFromModalBtn));
+    copyPixFooterBtn.addEventListener('click', () => copyPixToClipboard(copyPixFooterBtn));
+
+    whatsappPixModalBtn.addEventListener('click', () => {
+      if (pixModalMessage) {
+        openWhatsApp(pixModalMessage);
+      } else {
+        openWhatsApp();
+      }
+      closePixModal();
+    });
 
     itens.forEach(item => {
       const priceLabel = item.precoTipo === 'minimo'
@@ -216,26 +294,16 @@ Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 
     });
 
     // botão WhatsApp
-    grid.addEventListener('click', (ev)=>{
+    grid.addEventListener('click', (ev) => {
       const btn = ev.target.closest('.wpp');
-      if(!btn) return;
+      if (!btn) return;
       const item = JSON.parse(btn.dataset.item);
       const msg = item.mensagemFinal ?? `Olá! Quero presentear vocês com o ${item.nome} como forma de carinho.`;
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank', 'noopener');
-    });
-
-    // copiar Pix
-    document.getElementById('copyPix').addEventListener('click', async ()=>{
-      try{
-        await navigator.clipboard.writeText(PIX_KEY);
-        const btn = document.getElementById('copyPix');
-        const old = btn.textContent;
-        btn.textContent = 'Copiado! ✅';
-        setTimeout(()=>btn.textContent = old, 1600);
-      }catch(e){
-        alert('Não foi possível copiar. Copie manualmente: ' + PIX_KEY);
+      if (item.id === 'lua-de-mel') {
+        openPixModal(msg);
+        return;
       }
+      openWhatsApp(msg);
     });
 
     document.getElementById('requestCardLink').addEventListener('click', ()=>{
