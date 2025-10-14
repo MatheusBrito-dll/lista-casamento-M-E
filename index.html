@@ -149,9 +149,19 @@ Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 
       { id:'cama', nome:'Jogo de Cama Queen 4 Peças', preco:390.00, img:'images/jogo-cama.jpg', small:'Maciez e aconchego para descansar juntinhos e repor as energias com muito amor.' },
       { id:'cabeceira', nome:'Cabeceira Queen Estofada', preco:870.00, img:'images/cabeceira-queen.jpg', small:'Um toque de elegância e conforto para completar nosso cantinho de descanso.' },
       { id:'mesa', nome:'Mesa de escritório', preco:580.00, img:'images/mesa.png', small:'Espaço perfeito para trabalhar e planejar nossos próximos passos com foco e carinho.' },
-      { id:'panela', nome:'Panela Elétrica de Arroz', preco:260.00, img:'images/panela-eletrica-de-arroz.jpg', small:'Praticidade na cozinha para preparar refeições deliciosas em poucos minutos.' },
+      {
+        id:'panela',
+        nome:'Panela Elétrica de Arroz',
+        preco:260.00,
+        img:'images/panela-eletrica-de-arroz.jpg',
+        gifted:true,
+        giftedBy:'Aline e Dhorque',
+        giftedThanks:'Muito obrigado pelo presente cheio de carinho! 💛'
+      },
       { id:'fogao', nome:'Fogão 5 bocas com Forno', preco:1350.00, img:'images/fogao-5-boca.jpg', small:'Coração da cozinha para preparar refeições especiais com muito amor.' }
     ];
+
+      
 
     const grid = document.getElementById('grid');
     const money = v => v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
