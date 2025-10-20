@@ -8,50 +8,88 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💛</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f5f6f8;
-      --card:#ffffff;
-      --text:#1f1f20;
-      --muted:#5e6470;
-      --brand:#3f5efb;
-      --brand-pressed:#324acc;
+      --bg:#d5cbbe;
+      --card:#f6f6f6;
+      --text:#000000;
+      --muted:#5c463bb3;
+      --brand:#5c463b;
+      --brand-soft:#e6c9b2;
+      --brand-pressed:#4a382f;
       --radius:22px;
-      --shadow:0 14px 40px rgba(31,48,98,0.08);
+      --shadow:0 14px 40px rgba(179,177,173,0.55);
       --gap:28px;
       --maxw:1200px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Quicksand",sans-serif;line-height:1.5}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Quicksand",sans-serif;line-height:1.5;scroll-behavior:smooth}
     a{color:inherit}
-    .wrap{max-width:var(--maxw);margin:auto;padding:32px 32px 48px}
-    header{display:grid;gap:24px;justify-items:center;text-align:center;padding:12px 0 48px}
-    header .intro{display:grid;gap:16px;justify-items:center}
-    header h1{margin:0;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.02em}
+    .wrap{max-width:var(--maxw);margin:auto;padding:48px 32px 48px}
+    header.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
+      padding:80px 10vw;background:url('images/Imagem inicial.png') center/cover no-repeat;color:#fff;text-align:left}
+    header.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(140deg,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.25) 32%,rgba(0,0,0,0) 70%)}
+    header.hero>*{position:relative;z-index:1}
+    .hero__copy{display:grid;gap:12px;margin-bottom:12vh}
+    .hero__title{margin:0;font-family:"Playfair Display",serif;font-style:italic;font-weight:600;color:#fff;
+      font-size:clamp(3.4rem,8vw,5.8rem);text-shadow:0 12px 32px rgba(0,0,0,0.45)}
+    .hero__names{font-family:"Playfair Display",serif;font-style:italic;font-weight:500;letter-spacing:0.05em;color:#fff;
+      font-size:clamp(2rem,5.5vw,3.2rem);text-shadow:0 12px 28px rgba(0,0,0,0.4)}
+    .hero__date{font-family:"Quicksand",sans-serif;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#fff;
+      font-size:clamp(1.1rem,3.2vw,1.8rem);text-shadow:0 12px 28px rgba(0,0,0,0.4)}
+    .hero__cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;border-radius:999px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-soft));color:#fff;font-weight:650;text-decoration:none;box-shadow:0 18px 48px rgba(92,70,59,0.35);
+      transition:transform .2s ease,box-shadow .2s ease}
+    .hero__cta:hover{transform:translateY(-3px);box-shadow:0 22px 54px rgba(92,70,59,0.42)}
+    .hero__cta:active{transform:translateY(0);box-shadow:0 16px 38px rgba(92,70,59,0.32)}
+    .intro{margin:-120px auto 64px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:48px clamp(24px,6vw,56px);display:grid;gap:36px;position:relative}
+    .intro__heading{display:grid;gap:18px;max-width:620px}
+    .intro__title{margin:0;font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-0.015em;color:var(--brand)}
+    .intro__text{margin:0;font-size:1.08rem;color:var(--muted)}
+    .gift-options{display:grid;gap:24px}
+    .gift-options__title{margin:0;font-size:1.4rem;font-weight:650;color:var(--brand)}
+    .gift-options__grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+    .option-card{background:var(--brand-soft);border-radius:18px;padding:24px;display:grid;gap:12px;align-content:start;
+      color:var(--brand);box-shadow:0 8px 22px rgba(92,70,59,0.18)}
+    .option-card__icon{font-size:1.8rem}
+    .option-card__title{margin:0;font-size:1.15rem;font-weight:650;color:var(--brand)}
+    .option-card__text{margin:0;color:var(--text);font-size:1rem}
+    main{background:var(--bg)}
     .cursive{font-family:"Quicksand",sans-serif;letter-spacing:-0.01em}
-    header p{margin:0;color:var(--muted);max-width:720px;font-size:1.05rem}
     .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(3,1fr)}
-    @media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:720px){.grid{grid-template-columns:1fr;}.wrap{padding:28px 22px 40px}}
-    @media(min-width:960px){
-      header{max-width:760px;margin:0 auto;}
+    @media(max-width:1024px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      header.hero{padding:72px 8vw}
+      .gift-options__grid{grid-template-columns:repeat(2,1fr)}
     }
-    .card{background:var(--card);border:none;border-radius:var(--radius);box-shadow:var(--shadow);
+    @media(max-width:720px){
+      .grid{grid-template-columns:1fr;}
+      .wrap{padding:32px 22px 40px}
+      header.hero{align-items:center;text-align:center;padding:72px 24px 96px}
+      .hero__copy{justify-items:center;margin-bottom:18vh}
+      .hero__cta{width:100%;max-width:320px}
+      .intro{margin:-96px auto 48px;padding:36px 24px}
+      .gift-options__grid{grid-template-columns:1fr}
+    }
+    .card{background:var(--card);border:1px solid rgba(92,70,59,0.12);border-radius:var(--radius);box-shadow:var(--shadow);
       overflow:hidden;display:flex;flex-direction:column;gap:0;transition:transform .2s ease,box-shadow .2s ease;
       backdrop-filter:blur(12px);}
-    .card:hover{transform:translateY(-6px);box-shadow:0 18px 52px rgba(31,48,98,0.12);}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 52px rgba(92,70,59,0.22);}
     .imgbox{position:relative;width:100%;aspect-ratio:1;border:none;overflow:hidden}
     .imgbox img{width:100%;height:100%;object-fit:cover;display:block}
+    .card:first-of-type .imgbox{aspect-ratio:auto}
+    .card:first-of-type .imgbox img{height:auto;object-fit:contain}
     .card.gifted .imgbox img{opacity:0.35}
     .content{padding:22px;display:grid;gap:14px}
     .title{font-weight:650;font-size:1.15rem;line-height:1.25}
     .price{color:var(--brand);font-weight:700;font-size:1.1rem}
     .actions{display:grid;gap:12px}
-    .wpp{appearance:none;border:0;background:linear-gradient(135deg,var(--brand),#7f53ff);color:#fff;padding:14px 18px;border-radius:16px;
-      font-weight:650;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 10px 25px rgba(63,94,251,0.25)}
-    .wpp:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(63,94,251,0.28)}
-    .wpp:active{transform:translateY(0);box-shadow:0 8px 20px rgba(63,94,251,0.2);background:linear-gradient(135deg,var(--brand-pressed),#5b3fd1)}
+    .wpp{appearance:none;border:0;background:linear-gradient(135deg,var(--brand),var(--brand-soft));color:#fff;padding:14px 18px;border-radius:16px;
+      font-weight:650;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 10px 25px rgba(92,70,59,0.25)}
+    .wpp:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(92,70,59,0.28)}
+    .wpp:active{transform:translateY(0);box-shadow:0 8px 20px rgba(92,70,59,0.2);background:linear-gradient(135deg,var(--brand-pressed),var(--brand))}
     .small{color:var(--muted);font-size:.96rem;line-height:1.35}
     .card.gifted .actions{justify-items:center;text-align:center}
     .card.gifted .thanks{color:var(--muted);font-size:1rem;line-height:1.4;font-weight:600}
@@ -65,59 +103,89 @@
       .payment-option{justify-items:flex-start;text-align:left}
       footer{text-align:left}
     }
-    .copy{padding:12px 18px;border-radius:16px;border:0;background:#eef1ff;color:var(--brand);cursor:pointer;font-weight:600;
+    .copy{padding:12px 18px;border-radius:16px;border:0;background:var(--brand-soft);color:var(--brand);cursor:pointer;font-weight:600;
       transition:transform .2s ease,box-shadow .2s ease}
-    .copy:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(63,94,251,0.18)}
+    .copy:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(92,70,59,0.18)}
     .muted{color:var(--muted)}
-    .note{margin:36px auto 0;text-align:center;color:var(--muted);font-size:1rem;max-width:760px}
+    .note{margin:36px auto 0;text-align:center;color:var(--brand);font-size:1rem;max-width:760px}
     body.modal-open{overflow:hidden}
-    .modal{position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:rgba(22,26,39,0.55);
+    .modal{position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:rgba(92,70,59,0.45);
       backdrop-filter:blur(6px);z-index:999}
     .modal[hidden]{display:none}
     .modal__card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 28px;max-width:420px;
       width:min(100%,420px);display:grid;gap:18px;justify-items:center;text-align:center;position:relative}
     .modal__close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-weight:600;
       cursor:pointer;font-size:0.95rem}
-    .modal__title{margin:0;font-size:1.35rem;font-weight:650}
-    .modal__img{width:100%;border-radius:18px;box-shadow:0 18px 40px rgba(31,48,98,0.16)}
+    .modal__title{margin:0;font-size:1.35rem;font-weight:650;color:var(--brand)}
+    .modal__img{width:100%;border-radius:18px;box-shadow:0 18px 40px rgba(92,70,59,0.16)}
     .modal__actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
     .modal__text{margin:0;color:var(--muted)}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="intro">
-        <h1 class="cursive">Nosso cantinho, com a sua ajuda </h1>
-        <p>Cada detalhe representa um pedacinho do nosso lar. Escolha um presente e faça parte dessa história!</p>
-      </div>
-    </header>
+  <header class="hero" aria-label="Foto dos noivos">
+    <div class="hero__copy">
+      <p class="hero__title">Save the date</p>
+      <span class="hero__names">Matheus and Estefhiny</span>
+      <span class="hero__date">20/03/2026</span>
+    </div>
+  </header>
 
-    <section aria-label="Lista de presentes">
-      <div id="grid" class="grid" role="list"></div>
-    </section>
-
-    <p class="note"><strong>Observação:</strong> Os valores indicados são simbólicos e representam sugestões de presentes. Você pode contribuir via Pix ou escolher o item que desejar, basta nos avisar para que possamos atualizar a lista.</p>
-
-    <footer aria-label="Formas de presente">
-      <div class="payment-options">
-        <section class="payment-option" aria-label="Pagamento por Pix">
-          <h2 style="margin:0;font-size:1.35rem;font-weight:650">Pix</h2>
-          <div class="pixline">
-            <span id="pixKey" style="font-size:1.05rem;font-weight:600">073.895.551-57</span>
-            <button class="copy" id="copyPix">Copiar chave Pix</button>
+  <main>
+    <div class="wrap">
+      <section class="intro" aria-labelledby="introTitle">
+        <div class="intro__heading">
+          <h1 id="introTitle" class="intro__title">Com muito carinho, preparamos nossa lista de presentes</h1>
+          <p class="intro__text">Escolha o presente que mais combina com você e ajude a montar nosso lar. É só selecionar uma opção e falar com a gente pelo WhatsApp. 💛</p>
+          <a class="hero__cta" href="#lista">Ver lista completa</a>
+        </div>
+        <div class="gift-options" aria-label="Opções de presentes">
+          <h2 class="gift-options__title">Como você pode nos presentear</h2>
+          <div class="gift-options__grid">
+            <article class="option-card">
+              <span class="option-card__icon" aria-hidden="true">🎁</span>
+              <h3 class="option-card__title">Escolhendo um item</h3>
+              <p class="option-card__text">Escolha um item da lista e nos avise. Você pode contribuir com o valor ou presentear com o produto, combinamos a entrega pelo WhatsApp.</p>
+            </article>
+            <article class="option-card">
+              <span class="option-card__icon" aria-hidden="true">💌</span>
+              <h3 class="option-card__title">Enviando uma mensagem</h3>
+              <p class="option-card__text">Prefere sugerir outra lembrança? É só mandar uma mensagem que combinamos juntos.</p>
+            </article>
+            <article class="option-card">
+              <span class="option-card__icon" aria-hidden="true">✨</span>
+              <h3 class="option-card__title">Contribuindo com a viagem</h3>
+              <p class="option-card__text">As cotas da Operação Lua de Mel ajudam a transformar nossa primeira viagem em algo inesquecível.</p>
+            </article>
           </div>
-        </section>
-        <section class="payment-option" aria-label="Pagamento por cartão de crédito">
-          <h2 style="margin:0;font-size:1.35rem;font-weight:650">Cartão de Crédito</h2>
-          <p class="muted" style="margin:0">Prefere presentear com o cartão? É só nos chamar para solicitar o link com o valor que desejar.</p>
-          <button class="wpp" id="requestCardLink" type="button">Pedir link aos noivos</button>
-        </section>
-      </div>
-      <p class="muted" style="margin:4px 0 0">Depois de enviar, você pode nos mandar o comprovante pelo WhatsApp. Obrigado por fazer parte da nossa história!
-Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 🎁</p>
-    </footer>
-  </div>
+        </div>
+      </section>
+
+      <section id="lista" aria-label="Lista de presentes">
+        <div id="grid" class="grid" role="list"></div>
+      </section>
+
+      <p class="note"><strong>Observação:</strong> Os valores indicados são simbólicos e representam sugestões de presentes. Você pode contribuir via Pix ou escolher o item que desejar, basta nos avisar para que possamos atualizar a lista.</p>
+
+      <footer aria-label="Formas de presente">
+        <div class="payment-options">
+          <section class="payment-option" aria-label="Pagamento por Pix">
+            <h2 style="margin:0;font-size:1.35rem;font-weight:650">Pix</h2>
+            <div class="pixline">
+              <span id="pixKey" style="font-size:1.05rem;font-weight:600">073.895.551-57</span>
+              <button class="copy" id="copyPix">Copiar chave Pix</button>
+            </div>
+          </section>
+          <section class="payment-option" aria-label="Pagamento por cartão de crédito">
+            <h2 style="margin:0;font-size:1.35rem;font-weight:650">Cartão de Crédito</h2>
+            <p class="muted" style="margin:0">Prefere presentear com o cartão? É só nos chamar para solicitar o link com o valor que desejar.</p>
+            <button class="wpp" id="requestCardLink" type="button">Pedir link aos noivos</button>
+          </section>
+        </div>
+        <p class="muted" style="margin:4px 0 0">Depois de enviar, você pode nos mandar o comprovante pelo WhatsApp. Obrigado por fazer parte da nossa história! Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 🎁</p>
+      </footer>
+    </div>
+  </main>
 
   <div id="pixModal" class="modal" hidden>
     <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="pixModalTitle">
