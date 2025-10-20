@@ -23,20 +23,42 @@
       --maxw:1200px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Quicksand",sans-serif;line-height:1.5}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Quicksand",sans-serif;line-height:1.5;scroll-behavior:smooth}
     a{color:inherit}
-    .wrap{max-width:var(--maxw);margin:auto;padding:32px 32px 48px}
-    header{display:grid;gap:24px;justify-items:center;text-align:center;padding:12px 0 48px}
-    header .hero{width:min(100%,520px);border-radius:28px;box-shadow:var(--shadow);object-fit:cover;display:block}
-    header .intro{display:grid;gap:16px;justify-items:center}
-    header h1{margin:0;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.02em}
+    .wrap{max-width:var(--maxw);margin:auto;padding:48px 32px 48px}
+    header.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+      padding:80px 10vw;background:url('images/Imagem inicial.png') center/cover no-repeat;color:#fff;text-align:left}
+    header.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(0,0,0,0.68) 0%,rgba(0,0,0,0.25) 60%,rgba(0,0,0,0.55) 100%);}
+    header.hero>*{position:relative;z-index:1}
+    .hero__content{display:grid;gap:18px;max-width:540px}
+    .hero__eyebrow{font-size:0.95rem;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+    header.hero h1{margin:0;font-size:clamp(36px,6vw,64px);font-weight:700;letter-spacing:-0.01em;line-height:1.1}
+    header.hero p{margin:0;color:rgba(255,255,255,0.82);font-size:1.08rem}
+    .hero__cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;border-radius:999px;
+      background:linear-gradient(135deg,var(--brand),#7f53ff);color:#fff;font-weight:650;text-decoration:none;box-shadow:0 18px 48px rgba(63,94,251,0.35);
+      transition:transform .2s ease,box-shadow .2s ease}
+    .hero__cta:hover{transform:translateY(-3px);box-shadow:0 22px 54px rgba(63,94,251,0.42)}
+    .hero__cta:active{transform:translateY(0);box-shadow:0 16px 38px rgba(63,94,251,0.32)}
+    .hero__scroll{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:inline-flex;flex-direction:column;
+      align-items:center;gap:12px;color:rgba(255,255,255,0.75);font-weight:600;text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;font-size:0.82rem}
+    .hero__scroll::before{content:"";width:22px;height:38px;border:2px solid rgba(255,255,255,0.6);border-radius:12px;position:relative}
+    .hero__scroll::after{content:"";width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.8);position:relative;top:-30px;
+      animation:scroll-dot 2.6s ease-in-out infinite}
+    @keyframes scroll-dot{0%{opacity:0;transform:translateY(-6px)}15%{opacity:1}50%{transform:translateY(8px);opacity:1}85%{opacity:0}100%{opacity:0;transform:translateY(10px)}}
+    main{background:var(--bg)}
     .cursive{font-family:"Quicksand",sans-serif;letter-spacing:-0.01em}
-    header p{margin:0;color:var(--muted);max-width:720px;font-size:1.05rem}
     .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(3,1fr)}
-    @media(max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:720px){.grid{grid-template-columns:1fr;}.wrap{padding:28px 22px 40px}}
-    @media(min-width:960px){
-      header{max-width:760px;margin:0 auto;}
+    @media(max-width:1024px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      header.hero{padding:72px 8vw}
+    }
+    @media(max-width:720px){
+      .grid{grid-template-columns:1fr;}
+      .wrap{padding:32px 22px 40px}
+      header.hero{align-items:center;text-align:center;padding:72px 24px 96px}
+      .hero__content{align-items:center}
+      .hero__cta{width:100%;max-width:320px}
+      .hero__scroll{bottom:32px}
     }
     .card{background:var(--card);border:none;border-radius:var(--radius);box-shadow:var(--shadow);
       overflow:hidden;display:flex;flex-direction:column;gap:0;transition:transform .2s ease,box-shadow .2s ease;
@@ -86,40 +108,43 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <img class="hero" src="images/Imagem inicial.png" alt="Casal se abraçando em celebração do casamento" loading="eager" decoding="async">
-      <div class="intro">
-        <h1 class="cursive">Nosso cantinho, com a sua ajuda </h1>
-        <p>Cada detalhe representa um pedacinho do nosso lar. Escolha um presente e faça parte dessa história!</p>
-      </div>
-    </header>
+  <header class="hero">
+    <div class="hero__content">
+      <span class="hero__eyebrow">Sites • Casamentos</span>
+      <h1>Crie um site de casamento</h1>
+      <p>Faça hoje uma avaliação gratuita e crie um belo site para o seu casamento. Adicione um mural, lista de presentes e até confirmação de presença.</p>
+      <a class="hero__cta" href="#lista">Comece agora</a>
+    </div>
+    <a class="hero__scroll" href="#lista">Role para ver a lista</a>
+  </header>
 
-    <section aria-label="Lista de presentes">
-      <div id="grid" class="grid" role="list"></div>
-    </section>
+  <main>
+    <div class="wrap">
+      <section id="lista" aria-label="Lista de presentes">
+        <div id="grid" class="grid" role="list"></div>
+      </section>
 
-    <p class="note"><strong>Observação:</strong> Os valores indicados são simbólicos e representam sugestões de presentes. Você pode contribuir via Pix ou escolher o item que desejar, basta nos avisar para que possamos atualizar a lista.</p>
+      <p class="note"><strong>Observação:</strong> Os valores indicados são simbólicos e representam sugestões de presentes. Você pode contribuir via Pix ou escolher o item que desejar, basta nos avisar para que possamos atualizar a lista.</p>
 
-    <footer aria-label="Formas de presente">
-      <div class="payment-options">
-        <section class="payment-option" aria-label="Pagamento por Pix">
-          <h2 style="margin:0;font-size:1.35rem;font-weight:650">Pix</h2>
-          <div class="pixline">
-            <span id="pixKey" style="font-size:1.05rem;font-weight:600">073.895.551-57</span>
-            <button class="copy" id="copyPix">Copiar chave Pix</button>
-          </div>
-        </section>
-        <section class="payment-option" aria-label="Pagamento por cartão de crédito">
-          <h2 style="margin:0;font-size:1.35rem;font-weight:650">Cartão de Crédito</h2>
-          <p class="muted" style="margin:0">Prefere presentear com o cartão? É só nos chamar para solicitar o link com o valor que desejar.</p>
-          <button class="wpp" id="requestCardLink" type="button">Pedir link aos noivos</button>
-        </section>
-      </div>
-      <p class="muted" style="margin:4px 0 0">Depois de enviar, você pode nos mandar o comprovante pelo WhatsApp. Obrigado por fazer parte da nossa história!
-Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 🎁</p>
-    </footer>
-  </div>
+      <footer aria-label="Formas de presente">
+        <div class="payment-options">
+          <section class="payment-option" aria-label="Pagamento por Pix">
+            <h2 style="margin:0;font-size:1.35rem;font-weight:650">Pix</h2>
+            <div class="pixline">
+              <span id="pixKey" style="font-size:1.05rem;font-weight:600">073.895.551-57</span>
+              <button class="copy" id="copyPix">Copiar chave Pix</button>
+            </div>
+          </section>
+          <section class="payment-option" aria-label="Pagamento por cartão de crédito">
+            <h2 style="margin:0;font-size:1.35rem;font-weight:650">Cartão de Crédito</h2>
+            <p class="muted" style="margin:0">Prefere presentear com o cartão? É só nos chamar para solicitar o link com o valor que desejar.</p>
+            <button class="wpp" id="requestCardLink" type="button">Pedir link aos noivos</button>
+          </section>
+        </div>
+        <p class="muted" style="margin:4px 0 0">Depois de enviar, você pode nos mandar o comprovante pelo WhatsApp. Obrigado por fazer parte da nossa história! Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 🎁</p>
+      </footer>
+    </div>
+  </main>
 
   <div id="pixModal" class="modal" hidden>
     <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="pixModalTitle">
