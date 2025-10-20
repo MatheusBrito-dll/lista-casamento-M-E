@@ -11,14 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f5f6f8;
-      --card:#ffffff;
-      --text:#1f1f20;
-      --muted:#5e6470;
-      --brand:#3f5efb;
-      --brand-pressed:#324acc;
+      --bg:#d5cbbe;
+      --card:#f6f6f6;
+      --text:#000000;
+      --muted:#5c463bb3;
+      --brand:#5c463b;
+      --brand-soft:#e6c9b2;
+      --brand-pressed:#4a382f;
       --radius:22px;
-      --shadow:0 14px 40px rgba(31,48,98,0.08);
+      --shadow:0 14px 40px rgba(179,177,173,0.55);
       --gap:28px;
       --maxw:1200px;
     }
@@ -28,26 +29,26 @@
     .wrap{max-width:var(--maxw);margin:auto;padding:48px 32px 48px}
     header.hero{position:relative;min-height:72vh;display:flex;align-items:flex-end;justify-content:center;
       padding:80px 10vw;background:url('images/Imagem inicial.png') center/cover no-repeat;color:#fff;text-align:left}
-    header.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.25) 60%,rgba(0,0,0,0.55) 100%);}
+    header.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(92,70,59,0.72) 0%,rgba(92,70,59,0.45) 55%,rgba(0,0,0,0.55) 100%);}
     header.hero>*{position:relative;z-index:1}
     .hero__cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;border-radius:999px;
-      background:linear-gradient(135deg,var(--brand),#7f53ff);color:#fff;font-weight:650;text-decoration:none;box-shadow:0 18px 48px rgba(63,94,251,0.35);
+      background:linear-gradient(135deg,var(--brand),var(--brand-soft));color:#fff;font-weight:650;text-decoration:none;box-shadow:0 18px 48px rgba(92,70,59,0.35);
       transition:transform .2s ease,box-shadow .2s ease}
-    .hero__cta:hover{transform:translateY(-3px);box-shadow:0 22px 54px rgba(63,94,251,0.42)}
-    .hero__cta:active{transform:translateY(0);box-shadow:0 16px 38px rgba(63,94,251,0.32)}
+    .hero__cta:hover{transform:translateY(-3px);box-shadow:0 22px 54px rgba(92,70,59,0.42)}
+    .hero__cta:active{transform:translateY(0);box-shadow:0 16px 38px rgba(92,70,59,0.32)}
     .intro{margin:-120px auto 64px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
       padding:48px clamp(24px,6vw,56px);display:grid;gap:36px;position:relative}
     .intro__heading{display:grid;gap:18px;max-width:620px}
-    .intro__title{margin:0;font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-0.015em;color:var(--text)}
+    .intro__title{margin:0;font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-0.015em;color:var(--brand)}
     .intro__text{margin:0;font-size:1.08rem;color:var(--muted)}
     .gift-options{display:grid;gap:24px}
-    .gift-options__title{margin:0;font-size:1.4rem;font-weight:650;color:var(--text)}
+    .gift-options__title{margin:0;font-size:1.4rem;font-weight:650;color:var(--brand)}
     .gift-options__grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
-    .option-card{background:#f7f8ff;border-radius:18px;padding:24px;display:grid;gap:12px;align-content:start;
-      box-shadow:0 8px 22px rgba(63,94,251,0.08)}
+    .option-card{background:var(--brand-soft);border-radius:18px;padding:24px;display:grid;gap:12px;align-content:start;
+      color:var(--brand);box-shadow:0 8px 22px rgba(92,70,59,0.18)}
     .option-card__icon{font-size:1.8rem}
-    .option-card__title{margin:0;font-size:1.15rem;font-weight:650;color:var(--text)}
-    .option-card__text{margin:0;color:var(--muted);font-size:1rem}
+    .option-card__title{margin:0;font-size:1.15rem;font-weight:650;color:var(--brand)}
+    .option-card__text{margin:0;color:var(--text);font-size:1rem}
     main{background:var(--bg)}
     .cursive{font-family:"Quicksand",sans-serif;letter-spacing:-0.01em}
     .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(3,1fr)}
@@ -64,10 +65,10 @@
       .intro{margin:-96px auto 48px;padding:36px 24px}
       .gift-options__grid{grid-template-columns:1fr}
     }
-    .card{background:var(--card);border:none;border-radius:var(--radius);box-shadow:var(--shadow);
+    .card{background:var(--card);border:1px solid rgba(92,70,59,0.12);border-radius:var(--radius);box-shadow:var(--shadow);
       overflow:hidden;display:flex;flex-direction:column;gap:0;transition:transform .2s ease,box-shadow .2s ease;
       backdrop-filter:blur(12px);}
-    .card:hover{transform:translateY(-6px);box-shadow:0 18px 52px rgba(31,48,98,0.12);}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 52px rgba(92,70,59,0.22);}
     .imgbox{position:relative;width:100%;aspect-ratio:1;border:none;overflow:hidden}
     .imgbox img{width:100%;height:100%;object-fit:cover;display:block}
     .card.gifted .imgbox img{opacity:0.35}
@@ -75,10 +76,10 @@
     .title{font-weight:650;font-size:1.15rem;line-height:1.25}
     .price{color:var(--brand);font-weight:700;font-size:1.1rem}
     .actions{display:grid;gap:12px}
-    .wpp{appearance:none;border:0;background:linear-gradient(135deg,var(--brand),#7f53ff);color:#fff;padding:14px 18px;border-radius:16px;
-      font-weight:650;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 10px 25px rgba(63,94,251,0.25)}
-    .wpp:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(63,94,251,0.28)}
-    .wpp:active{transform:translateY(0);box-shadow:0 8px 20px rgba(63,94,251,0.2);background:linear-gradient(135deg,var(--brand-pressed),#5b3fd1)}
+    .wpp{appearance:none;border:0;background:linear-gradient(135deg,var(--brand),var(--brand-soft));color:#fff;padding:14px 18px;border-radius:16px;
+      font-weight:650;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 10px 25px rgba(92,70,59,0.25)}
+    .wpp:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(92,70,59,0.28)}
+    .wpp:active{transform:translateY(0);box-shadow:0 8px 20px rgba(92,70,59,0.2);background:linear-gradient(135deg,var(--brand-pressed),var(--brand))}
     .small{color:var(--muted);font-size:.96rem;line-height:1.35}
     .card.gifted .actions{justify-items:center;text-align:center}
     .card.gifted .thanks{color:var(--muted);font-size:1rem;line-height:1.4;font-weight:600}
@@ -92,21 +93,21 @@
       .payment-option{justify-items:flex-start;text-align:left}
       footer{text-align:left}
     }
-    .copy{padding:12px 18px;border-radius:16px;border:0;background:#eef1ff;color:var(--brand);cursor:pointer;font-weight:600;
+    .copy{padding:12px 18px;border-radius:16px;border:0;background:var(--brand-soft);color:var(--brand);cursor:pointer;font-weight:600;
       transition:transform .2s ease,box-shadow .2s ease}
-    .copy:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(63,94,251,0.18)}
+    .copy:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(92,70,59,0.18)}
     .muted{color:var(--muted)}
-    .note{margin:36px auto 0;text-align:center;color:var(--muted);font-size:1rem;max-width:760px}
+    .note{margin:36px auto 0;text-align:center;color:var(--brand);font-size:1rem;max-width:760px}
     body.modal-open{overflow:hidden}
-    .modal{position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:rgba(22,26,39,0.55);
+    .modal{position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:rgba(92,70,59,0.45);
       backdrop-filter:blur(6px);z-index:999}
     .modal[hidden]{display:none}
     .modal__card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 28px;max-width:420px;
       width:min(100%,420px);display:grid;gap:18px;justify-items:center;text-align:center;position:relative}
     .modal__close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-weight:600;
       cursor:pointer;font-size:0.95rem}
-    .modal__title{margin:0;font-size:1.35rem;font-weight:650}
-    .modal__img{width:100%;border-radius:18px;box-shadow:0 18px 40px rgba(31,48,98,0.16)}
+    .modal__title{margin:0;font-size:1.35rem;font-weight:650;color:var(--brand)}
+    .modal__img{width:100%;border-radius:18px;box-shadow:0 18px 40px rgba(92,70,59,0.16)}
     .modal__actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
     .modal__text{margin:0;color:var(--muted)}
   </style>
