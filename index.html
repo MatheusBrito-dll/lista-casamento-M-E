@@ -1,116 +1,489 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nossa Lista de Presentes 💛</title>
   <meta name="description" content="Cada presente deixa nossa casa mais completa. Obrigado por fazer parte!">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💛</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💛</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f5f6f8;
-      --card:#ffffff;
-      --text:#1f1f20;
-      --muted:#5e6470;
-      --brand:#3f5efb;
-      --brand-pressed:#324acc;
-      --radius:22px;
-      --shadow:0 14px 40px rgba(31,48,98,0.08);
-      --gap:28px;
-      --maxw:1200px;
+    :root {
+      --bg: #f5f6f8;
+      --card: #ffffff;
+      --text: #1f1f20;
+      --muted: #5e6470;
+      --brand: #3f5efb;
+      --brand-pressed: #324acc;
+      --radius: 22px;
+      --shadow: 0 14px 40px rgba(31, 48, 98, 0.08);
+      --gap: 28px;
+      --maxw: 1200px;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:"Quicksand",sans-serif;line-height:1.5;scroll-behavior:smooth}
-    a{color:inherit}
-    .wrap{max-width:var(--maxw);margin:auto;padding:48px 32px 48px}
-    header.hero{position:relative;min-height:72vh;display:flex;align-items:flex-end;justify-content:center;
-      padding:80px 10vw;background:url('images/Imagem inicial.png') center/cover no-repeat;color:#fff;text-align:left}
-    header.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.25) 60%,rgba(0,0,0,0.55) 100%);}
-    header.hero>*{position:relative;z-index:1}
-    .hero__cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;border-radius:999px;
-      background:linear-gradient(135deg,var(--brand),#7f53ff);color:#fff;font-weight:650;text-decoration:none;box-shadow:0 18px 48px rgba(63,94,251,0.35);
-      transition:transform .2s ease,box-shadow .2s ease}
-    .hero__cta:hover{transform:translateY(-3px);box-shadow:0 22px 54px rgba(63,94,251,0.42)}
-    .hero__cta:active{transform:translateY(0);box-shadow:0 16px 38px rgba(63,94,251,0.32)}
-    .intro{margin:-120px auto 64px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
-      padding:48px clamp(24px,6vw,56px);display:grid;gap:36px;position:relative}
-    .intro__heading{display:grid;gap:18px;max-width:620px}
-    .intro__title{margin:0;font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-0.015em;color:var(--text)}
-    .intro__text{margin:0;font-size:1.08rem;color:var(--muted)}
-    .gift-options{display:grid;gap:24px}
-    .gift-options__title{margin:0;font-size:1.4rem;font-weight:650;color:var(--text)}
-    .gift-options__grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
-    .option-card{background:#f7f8ff;border-radius:18px;padding:24px;display:grid;gap:12px;align-content:start;
-      box-shadow:0 8px 22px rgba(63,94,251,0.08)}
-    .option-card__icon{font-size:1.8rem}
-    .option-card__title{margin:0;font-size:1.15rem;font-weight:650;color:var(--text)}
-    .option-card__text{margin:0;color:var(--muted);font-size:1rem}
-    main{background:var(--bg)}
-    .cursive{font-family:"Quicksand",sans-serif;letter-spacing:-0.01em}
-    .grid{display:grid;gap:var(--gap);grid-template-columns:repeat(3,1fr)}
-    @media(max-width:1024px){
-      .grid{grid-template-columns:repeat(2,1fr)}
-      header.hero{padding:72px 8vw}
-      .gift-options__grid{grid-template-columns:repeat(2,1fr)}
+
+    * {
+      box-sizing: border-box
     }
-    @media(max-width:720px){
-      .grid{grid-template-columns:1fr;}
-      .wrap{padding:32px 22px 40px}
-      header.hero{align-items:center;text-align:center;padding:72px 24px 96px}
-      .hero__cta{width:100%;max-width:320px}
-      .intro{margin:-96px auto 48px;padding:36px 24px}
-      .gift-options__grid{grid-template-columns:1fr}
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Quicksand", sans-serif;
+      line-height: 1.5;
+      scroll-behavior: smooth
     }
-    .card{background:var(--card);border:none;border-radius:var(--radius);box-shadow:var(--shadow);
-      overflow:hidden;display:flex;flex-direction:column;gap:0;transition:transform .2s ease,box-shadow .2s ease;
-      backdrop-filter:blur(12px);}
-    .card:hover{transform:translateY(-6px);box-shadow:0 18px 52px rgba(31,48,98,0.12);}
-    .imgbox{position:relative;width:100%;aspect-ratio:1;border:none;overflow:hidden}
-    .imgbox img{width:100%;height:100%;object-fit:cover;display:block}
-    .card.gifted .imgbox img{opacity:0.35}
-    .content{padding:22px;display:grid;gap:14px}
-    .title{font-weight:650;font-size:1.15rem;line-height:1.25}
-    .price{color:var(--brand);font-weight:700;font-size:1.1rem}
-    .actions{display:grid;gap:12px}
-    .wpp{appearance:none;border:0;background:linear-gradient(135deg,var(--brand),#7f53ff);color:#fff;padding:14px 18px;border-radius:16px;
-      font-weight:650;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 10px 25px rgba(63,94,251,0.25)}
-    .wpp:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(63,94,251,0.28)}
-    .wpp:active{transform:translateY(0);box-shadow:0 8px 20px rgba(63,94,251,0.2);background:linear-gradient(135deg,var(--brand-pressed),#5b3fd1)}
-    .small{color:var(--muted);font-size:.96rem;line-height:1.35}
-    .card.gifted .actions{justify-items:center;text-align:center}
-    .card.gifted .thanks{color:var(--muted);font-size:1rem;line-height:1.4;font-weight:600}
-    footer{margin:56px auto 0;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
-      padding:28px;display:grid;gap:24px;align-items:center;text-align:center}
-    .payment-options{display:grid;gap:18px}
-    .payment-option{display:grid;gap:12px;justify-items:center}
-    .pixline{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center}
-    @media(min-width:720px){
-      .payment-options{grid-template-columns:repeat(2,1fr);align-items:start;text-align:left}
-      .payment-option{justify-items:flex-start;text-align:left}
-      footer{text-align:left}
+
+    a {
+      color: inherit
     }
-    .copy{padding:12px 18px;border-radius:16px;border:0;background:#eef1ff;color:var(--brand);cursor:pointer;font-weight:600;
-      transition:transform .2s ease,box-shadow .2s ease}
-    .copy:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(63,94,251,0.18)}
-    .muted{color:var(--muted)}
-    .note{margin:36px auto 0;text-align:center;color:var(--muted);font-size:1rem;max-width:760px}
-    body.modal-open{overflow:hidden}
-    .modal{position:fixed;inset:0;display:grid;place-items:center;padding:24px;background:rgba(22,26,39,0.55);
-      backdrop-filter:blur(6px);z-index:999}
-    .modal[hidden]{display:none}
-    .modal__card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:32px 28px;max-width:420px;
-      width:min(100%,420px);display:grid;gap:18px;justify-items:center;text-align:center;position:relative}
-    .modal__close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-weight:600;
-      cursor:pointer;font-size:0.95rem}
-    .modal__title{margin:0;font-size:1.35rem;font-weight:650}
-    .modal__img{width:100%;border-radius:18px;box-shadow:0 18px 40px rgba(31,48,98,0.16)}
-    .modal__actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:100%}
-    .modal__text{margin:0;color:var(--muted)}
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: auto;
+      padding: 48px 32px 48px
+    }
+
+    header.hero {
+      position: relative;
+      min-height: 72vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 80px 10vw;
+      background: url('images/Imagem inicial.png') center/cover no-repeat;
+      color: #fff;
+      text-align: left
+    }
+
+    header.hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.55) 100%);
+    }
+
+    header.hero>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand), #7f53ff);
+      color: #fff;
+      font-weight: 650;
+      text-decoration: none;
+      box-shadow: 0 18px 48px rgba(63, 94, 251, 0.35);
+      transition: transform .2s ease, box-shadow .2s ease
+    }
+
+    .hero__cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 54px rgba(63, 94, 251, 0.42)
+    }
+
+    .hero__cta:active {
+      transform: translateY(0);
+      box-shadow: 0 16px 38px rgba(63, 94, 251, 0.32)
+    }
+
+    .intro {
+      margin: -120px auto 64px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 48px clamp(24px, 6vw, 56px);
+      display: grid;
+      gap: 36px;
+      position: relative
+    }
+
+    .intro__heading {
+      display: grid;
+      gap: 18px;
+      max-width: 620px
+    }
+
+    .intro__title {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text)
+    }
+
+    .intro__text {
+      margin: 0;
+      font-size: 1.08rem;
+      color: var(--muted)
+    }
+
+    .gift-options {
+      display: grid;
+      gap: 24px
+    }
+
+    .gift-options__title {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 650;
+      color: var(--text)
+    }
+
+    .gift-options__grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(3, 1fr)
+    }
+
+    .option-card {
+      background: #f7f8ff;
+      border-radius: 18px;
+      padding: 24px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+      box-shadow: 0 8px 22px rgba(63, 94, 251, 0.08)
+    }
+
+    .option-card__icon {
+      font-size: 1.8rem
+    }
+
+    .option-card__title {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 650;
+      color: var(--text)
+    }
+
+    .option-card__text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem
+    }
+
+    main {
+      background: var(--bg)
+    }
+
+    .cursive {
+      font-family: "Quicksand", sans-serif;
+      letter-spacing: -0.01em
+    }
+
+    .grid {
+      display: grid;
+      gap: var(--gap);
+      grid-template-columns: repeat(3, 1fr)
+    }
+
+    @media(max-width:1024px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      header.hero {
+        padding: 72px 8vw
+      }
+
+      .gift-options__grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wrap {
+        padding: 32px 22px 40px
+      }
+
+      header.hero {
+        align-items: center;
+        text-align: center;
+        padding: 72px 24px 96px
+      }
+
+      .hero__cta {
+        width: 100%;
+        max-width: 320px
+      }
+
+      .intro {
+        margin: -96px auto 48px;
+        padding: 36px 24px
+      }
+
+      .gift-options__grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: none;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: transform .2s ease, box-shadow .2s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 52px rgba(31, 48, 98, 0.12);
+    }
+
+    .imgbox {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border: none;
+      overflow: hidden
+    }
+
+    .imgbox img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .card.gifted .imgbox img {
+      opacity: 0.35
+    }
+
+    .content {
+      padding: 22px;
+      display: grid;
+      gap: 14px
+    }
+
+    .title {
+      font-weight: 650;
+      font-size: 1.15rem;
+      line-height: 1.25
+    }
+
+    .price {
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 1.1rem
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px
+    }
+
+    .wpp {
+      appearance: none;
+      border: 0;
+      background: linear-gradient(135deg, var(--brand), #7f53ff);
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 0 10px 25px rgba(63, 94, 251, 0.25)
+    }
+
+    .wpp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(63, 94, 251, 0.28)
+    }
+
+    .wpp:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 20px rgba(63, 94, 251, 0.2);
+      background: linear-gradient(135deg, var(--brand-pressed), #5b3fd1)
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: .96rem;
+      line-height: 1.35
+    }
+
+    .card.gifted .actions {
+      justify-items: center;
+      text-align: center
+    }
+
+    .card.gifted .thanks {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 600
+    }
+
+    footer {
+      margin: 56px auto 0;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      display: grid;
+      gap: 24px;
+      align-items: center;
+      text-align: center
+    }
+
+    .payment-options {
+      display: grid;
+      gap: 18px
+    }
+
+    .payment-option {
+      display: grid;
+      gap: 12px;
+      justify-items: center
+    }
+
+    .pixline {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center
+    }
+
+    @media(min-width:720px) {
+      .payment-options {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: start;
+        text-align: left
+      }
+
+      .payment-option {
+        justify-items: flex-start;
+        text-align: left
+      }
+
+      footer {
+        text-align: left
+      }
+    }
+
+    .copy {
+      padding: 12px 18px;
+      border-radius: 16px;
+      border: 0;
+      background: #eef1ff;
+      color: var(--brand);
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform .2s ease, box-shadow .2s ease
+    }
+
+    .copy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(63, 94, 251, 0.18)
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .note {
+      margin: 36px auto 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 760px
+    }
+
+    body.modal-open {
+      overflow: hidden
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(22, 26, 39, 0.55);
+      backdrop-filter: blur(6px);
+      z-index: 999
+    }
+
+    .modal[hidden] {
+      display: none
+    }
+
+    .modal__card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+      max-width: 420px;
+      width: min(100%, 420px);
+      display: grid;
+      gap: 18px;
+      justify-items: center;
+      text-align: center;
+      position: relative
+    }
+
+    .modal__close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem
+    }
+
+    .modal__title {
+      margin: 0;
+      font-size: 1.35rem;
+      font-weight: 650
+    }
+
+    .modal__img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(31, 48, 98, 0.16)
+    }
+
+    .modal__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      width: 100%
+    }
+
+    .modal__text {
+      margin: 0;
+      color: var(--muted)
+    }
   </style>
 </head>
+
 <body>
   <header class="hero" aria-label="Foto dos noivos"></header>
 
@@ -119,7 +492,9 @@
       <section class="intro" aria-labelledby="introTitle">
         <div class="intro__heading">
           <h1 id="introTitle" class="intro__title">Com muito carinho, preparamos nossa lista de presentes</h1>
-          <p class="intro__text">Escolha o presente que mais combina com você e ajude a montar nosso lar. É só selecionar uma opção e falar com a gente pelo WhatsApp. 💛</p>
+          <p class="intro__text">Escolha o presente que mais combina com você e nos ajude a montar nosso lar. Você pode
+            contribuir com o valor do item ou presentear com o próprio produto — é só nos avisar pelo WhatsApp para
+            combinarmos a entrega, seja no dia do casamento ou aqui em casa.</p>
           <a class="hero__cta" href="#lista">Ver lista completa</a>
         </div>
         <div class="gift-options" aria-label="Opções de presentes">
@@ -128,17 +503,20 @@
             <article class="option-card">
               <span class="option-card__icon" aria-hidden="true">🎁</span>
               <h3 class="option-card__title">Escolhendo um item</h3>
-              <p class="option-card__text">Veja a lista completa, escolha um produto e nos avise para marcarmos como recebido.</p>
+              <p class="option-card__text">Veja a lista completa, escolha um produto e nos avise para marcarmos como
+                recebido.</p>
             </article>
             <article class="option-card">
               <span class="option-card__icon" aria-hidden="true">💌</span>
               <h3 class="option-card__title">Enviando uma mensagem</h3>
-              <p class="option-card__text">Prefere sugerir outra lembrança? É só mandar uma mensagem que combinamos juntos.</p>
+              <p class="option-card__text">Prefere sugerir outra lembrança? É só mandar uma mensagem que combinamos
+                juntos.</p>
             </article>
             <article class="option-card">
               <span class="option-card__icon" aria-hidden="true">✨</span>
               <h3 class="option-card__title">Contribuindo com a viagem</h3>
-              <p class="option-card__text">As cotas da Operação Lua de Mel ajudam a transformar nossa primeira viagem em algo inesquecível.</p>
+              <p class="option-card__text">As cotas da Operação Lua de Mel ajudam a transformar nossa primeira viagem em
+                algo inesquecível.</p>
             </article>
           </div>
         </div>
@@ -148,7 +526,9 @@
         <div id="grid" class="grid" role="list"></div>
       </section>
 
-      <p class="note"><strong>Observação:</strong> Os valores indicados são simbólicos e representam sugestões de presentes. Você pode contribuir via Pix ou escolher o item que desejar, basta nos avisar para que possamos atualizar a lista.</p>
+      <p class="note"><strong>Observação:</strong> Os valores indicados são simbólicos e representam sugestões de
+        presentes. Você pode contribuir via Pix ou escolher o item que desejar, basta nos avisar para que possamos
+        atualizar a lista.</p>
 
       <footer aria-label="Formas de presente">
         <div class="payment-options">
@@ -161,11 +541,14 @@
           </section>
           <section class="payment-option" aria-label="Pagamento por cartão de crédito">
             <h2 style="margin:0;font-size:1.35rem;font-weight:650">Cartão de Crédito</h2>
-            <p class="muted" style="margin:0">Prefere presentear com o cartão? É só nos chamar para solicitar o link com o valor que desejar.</p>
+            <p class="muted" style="margin:0">Prefere presentear com o cartão? É só nos chamar para solicitar o link com
+              o valor que desejar.</p>
             <button class="wpp" id="requestCardLink" type="button">Pedir link aos noivos</button>
           </section>
         </div>
-        <p class="muted" style="margin:4px 0 0">Depois de enviar, você pode nos mandar o comprovante pelo WhatsApp. Obrigado por fazer parte da nossa história! Cada lembrança escolhida com carinho deixa nosso cantinho ainda mais especial. 🎁</p>
+        <p class="muted" style="margin:4px 0 0">Depois de enviar, você pode nos mandar o comprovante pelo WhatsApp.
+          Obrigado por fazer parte da nossa história! Cada lembrança escolhida com carinho deixa nosso cantinho ainda
+          mais especial. 🎁</p>
       </footer>
     </div>
   </main>
@@ -174,8 +557,10 @@
     <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="pixModalTitle">
       <button type="button" class="modal__close" id="closePixModal" aria-label="Fechar janela">✕</button>
       <h3 id="pixModalTitle" class="modal__title">Contribua com a Operação Lua de Mel</h3>
-      <p class="modal__text">Escaneie o QR Code ou copie nossa chave Pix para enviar o presente com o valor que preferir.</p>
-      <img class="modal__img" src="images/Pix-qrcode.png" alt="QR Code Pix para contribuição com a Operação Lua de Mel" loading="lazy" decoding="async">
+      <p class="modal__text">Escaneie o QR Code ou copie nossa chave Pix para enviar o presente com o valor que
+        preferir.</p>
+      <img class="modal__img" src="images/Pix-qrcode.png" alt="QR Code Pix para contribuição com a Operação Lua de Mel"
+        loading="lazy" decoding="async">
       <div class="modal__actions">
         <button class="copy" type="button" id="copyPixFromModal">Copiar chave Pix</button>
         <button class="wpp" type="button" id="whatsappPixModal">Avisar no WhatsApp</button>
@@ -206,66 +591,66 @@
 
     const itens = [
       {
-        id:'lua-de-mel',
-        nome:'Operação Lua de Mel',
-        preco:50.00,
-        precoTipo:'minimo',
-        img:'images/operacao-luademel.png',
-        cta:'Contribuir',
-        mensagem:'Olá! Quero contribuir com a Operação Lua de Mel com um valor a combinar. 💝',
-        small:'Contribua com o valor que desejar a partir de R$ 50,00 para tornar nossa viagem inesquecível.'
+        id: 'lua-de-mel',
+        nome: 'Operação Lua de Mel',
+        preco: 50.00,
+        precoTipo: 'minimo',
+        img: 'images/operacao-luademel.png',
+        cta: 'Contribuir',
+        mensagem: 'Olá! Quero contribuir com a Operação Lua de Mel com um valor a combinar. 💝',
+        small: 'Contribua com o valor que desejar a partir de R$ 50,00 para tornar nossa viagem inesquecível.'
       },
       {
-        id:'kit-churrasco',
-        nome:'Kit de Churrasco',
-        preco:79.00,
-        img:'images/kit-churrasco.png',
-        small:'Perfeito para reunir a família no nosso novo lar. Obrigado por aquecer nossos encontros!'
+        id: 'kit-churrasco',
+        nome: 'Kit de Churrasco',
+        preco: 79.00,
+        img: 'images/kit-churrasco.png',
+        small: 'Perfeito para reunir a família no nosso novo lar. Obrigado por aquecer nossos encontros!'
       },
       {
-        id:'vasos',
-        nome:'Vasos Decorativos',
-        preco:69.00,
-        img:'images/vaso-decorativo.png',
-        small:'Um toque de verde e carinho para deixar nossa casa mais viva e acolhedora.'
+        id: 'vasos',
+        nome: 'Vasos Decorativos',
+        preco: 69.00,
+        img: 'images/vaso-decorativo.png',
+        small: 'Um toque de verde e carinho para deixar nossa casa mais viva e acolhedora.'
       },
-      { id:'sofa', nome:'Sofá Retrátil Cinza', preco:1290.00, img:'images/sofa.jpg', small:'Nosso cantinho da sala vai ficar ainda mais aconchegante para receber todo mundo com conforto.' },
-      { id:'tv', nome:'Smart TV 65" 4K', preco:2990.00, img:'images/TV.jpg', small:'Filmes, séries e jogos com imagem perfeita para aproveitar noites especiais juntinhos.' },
-      { id:'rack', nome:'Rack Minimalista de Madeira', preco:780.00, img:'images/rack.jpg', small:'Organização e estilo para a sala, deixando tudo no lugar e com um toque acolhedor.' },
-      { id:'cortina', nome:'Cortina Para Quarto ou Sala', preco:240.00, img:'images/Cortina%20Para%20Quarto%20Ou%20Sala.png', small:'Cortinas suaves para deixar os ambientes aconchegantes e com a nossa cara.' },
-      { id:'cafeteira', nome:'Cafeteira Espresso Inox', preco:420.00, img:'images/cafeteira.jpg', gifted:true, giftedBy:'Gabriel e Maria', giftedThanks:'Muito obrigado pelo presente cheio de carinho! 💛' },
-      { id:'xicara', nome:'Conjunto de Xícaras de Café', preco:150.00, img:'images/xicara.jpg', small:'Um convite a muitas conversas gostosas com café quentinho e companhia querida.' },
-      { id:'kit', nome:'Kit de Ferramentas Completo', preco:280.00, img:'images/Kit-Ferramenta.jpg', small:'Perfeito para montar, ajustar e construir nossos sonhos a dois com a casa novinha.' },
-      { id:'abajur', nome:'Abajures Modernos', preco:90.00, img:'images/abajures.jpg', small:'Luz suave para deixar os momentos da noite ainda mais especiais e cheios de charme.' },
-      { id:'aspirador', nome:'Aspirador de Pó Robô', preco:1250.00, img:'images/aspirador-de-pó-robo.jpg', small:'Praticidade total para manter a casa limpinha enquanto curtimos o tempo juntos.' },
-      { id:'lava', nome:'Lava-louças Inox 14 Serviços', preco:3540.00, img:'images/lava-louca.jpg', small:'Ajuda extra no dia a dia para sobrar mais tempo para curtir a vida a dois.' },
+      { id: 'sofa', nome: 'Sofá Retrátil Cinza', preco: 1290.00, img: 'images/sofa.jpg', small: 'Nosso cantinho da sala vai ficar ainda mais aconchegante para receber todo mundo com conforto.' },
+      { id: 'tv', nome: 'Smart TV 65" 4K', preco: 2990.00, img: 'images/TV.jpg', small: 'Filmes, séries e jogos com imagem perfeita para aproveitar noites especiais juntinhos.' },
+      { id: 'rack', nome: 'Rack Minimalista de Madeira', preco: 780.00, img: 'images/rack.jpg', small: 'Organização e estilo para a sala, deixando tudo no lugar e com um toque acolhedor.' },
+      { id: 'cortina', nome: 'Cortina Para Quarto ou Sala', preco: 240.00, img: 'images/Cortina%20Para%20Quarto%20Ou%20Sala.png', small: 'Cortinas suaves para deixar os ambientes aconchegantes e com a nossa cara.' },
+      { id: 'cafeteira', nome: 'Cafeteira Espresso Inox', preco: 420.00, img: 'images/cafeteira.jpg', gifted: true, giftedBy: 'Gabriel e Maria', giftedThanks: 'Muito obrigado pelo presente cheio de carinho! 💛' },
+      { id: 'xicara', nome: 'Conjunto de Xícaras de Café', preco: 150.00, img: 'images/xicara.jpg', small: 'Um convite a muitas conversas gostosas com café quentinho e companhia querida.' },
+      { id: 'kit', nome: 'Kit de Ferramentas Completo', preco: 280.00, img: 'images/Kit-Ferramenta.jpg', small: 'Perfeito para montar, ajustar e construir nossos sonhos a dois com a casa novinha.' },
+      { id: 'abajur', nome: 'Abajures Modernos', preco: 90.00, img: 'images/abajures.jpg', small: 'Luz suave para deixar os momentos da noite ainda mais especiais e cheios de charme.' },
+      { id: 'aspirador', nome: 'Aspirador de Pó Robô', preco: 1250.00, img: 'images/aspirador-de-pó-robo.jpg', small: 'Praticidade total para manter a casa limpinha enquanto curtimos o tempo juntos.' },
+      { id: 'lava', nome: 'Lava-louças Inox 14 Serviços', preco: 3540.00, img: 'images/lava-louca.jpg', small: 'Ajuda extra no dia a dia para sobrar mais tempo para curtir a vida a dois.' },
       {
-        id:'ferro',
-        nome:'Ferro a Vapor',
-        preco:220.00,
-        img:'images/ferro-de-passar.jpg',
-        gifted:true,
-        giftedBy:'Diogo e Victoria',
-        giftedThanks:'Muito obrigado pelo carinho, pelo presente e a ajuda na Lua de mel, Deus abençoe vocês! 💛'
+        id: 'ferro',
+        nome: 'Ferro a Vapor',
+        preco: 220.00,
+        img: 'images/ferro-de-passar.jpg',
+        gifted: true,
+        giftedBy: 'Diogo e Victoria',
+        giftedThanks: 'Muito obrigado pelo carinho, pelo presente e a ajuda na Lua de mel, Deus abençoe vocês! 💛'
       },
-      { id:'cama', nome:'Jogo de Cama Queen 4 Peças', preco:390.00, img:'images/jogo-cama.jpg', small:'Maciez e aconchego para descansar juntinhos e repor as energias com muito amor.' },
-      { id:'panela-polishop', nome:'Panela Polishop com Tampa', preco:310.00, img:'images/Panela%20Polishop%20com%20Tampa.png', small:'Ajuda perfeita para receitas cheias de sabor e carinho no dia a dia.' },
-      { id:'cabeceira', nome:'Cabeceira Queen Estofada', preco:870.00, img:'images/cabeceira-queen.jpg', small:'Um toque de elegância e conforto para completar nosso cantinho de descanso.' },
-      { id:'poltrona', nome:'Poltrona Decorativa', preco:760.00, img:'images/Poltrona%20Cadeira%20Decorativa.png', small:'Uma poltrona charmosa para relaxar, ler e aproveitar momentos especiais a dois.' },
-      { id:'mesa', nome:'Mesa de escritório', preco:580.00, img:'images/mesa.png', small:'Espaço perfeito para trabalhar e planejar nossos próximos passos com foco e carinho.' },
+      { id: 'cama', nome: 'Jogo de Cama Queen 4 Peças', preco: 390.00, img: 'images/jogo-cama.jpg', small: 'Maciez e aconchego para descansar juntinhos e repor as energias com muito amor.' },
+      { id: 'panela-polishop', nome: 'Panela Polishop com Tampa', preco: 310.00, img: 'images/Panela%20Polishop%20com%20Tampa.png', small: 'Ajuda perfeita para receitas cheias de sabor e carinho no dia a dia.' },
+      { id: 'cabeceira', nome: 'Cabeceira Queen Estofada', preco: 870.00, img: 'images/cabeceira-queen.jpg', small: 'Um toque de elegância e conforto para completar nosso cantinho de descanso.' },
+      { id: 'poltrona', nome: 'Poltrona Decorativa', preco: 760.00, img: 'images/Poltrona%20Cadeira%20Decorativa.png', small: 'Uma poltrona charmosa para relaxar, ler e aproveitar momentos especiais a dois.' },
+      { id: 'mesa', nome: 'Mesa de escritório', preco: 580.00, img: 'images/mesa.png', small: 'Espaço perfeito para trabalhar e planejar nossos próximos passos com foco e carinho.' },
       {
-        id:'panela',
-        nome:'Panela Elétrica de Arroz',
-        preco:260.00,
-        img:'images/panela-eletrica-de-arroz.jpg',
-        gifted:true,
-        giftedBy:'Aline e Dhorque',
-        giftedThanks:'Muito obrigado pelo presente cheio de carinho! 💛'
+        id: 'panela',
+        nome: 'Panela Elétrica de Arroz',
+        preco: 260.00,
+        img: 'images/panela-eletrica-de-arroz.jpg',
+        gifted: true,
+        giftedBy: 'Aline e Dhorque',
+        giftedThanks: 'Muito obrigado pelo presente cheio de carinho! 💛'
       },
-      { id:'fogao', nome:'Fogão 5 bocas com Forno', preco:1350.00, img:'images/fogao-5-boca.jpg', small:'Coração da cozinha para preparar refeições especiais com muito amor.' }
+      { id: 'fogao', nome: 'Fogão 5 bocas com Forno', preco: 1350.00, img: 'images/fogao-5-boca.jpg', small: 'Coração da cozinha para preparar refeições especiais com muito amor.' }
     ];
 
-      
+
 
     const grid = document.getElementById('grid');
     const pixModal = document.getElementById('pixModal');
@@ -275,7 +660,7 @@
     const copyPixFooterBtn = document.getElementById('copyPix');
     let pixModalMessage = null;
 
-    const money = v => v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+    const money = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
     const openPixModal = (message) => {
       pixModalMessage = message;
@@ -365,11 +750,12 @@
       openWhatsApp(msg);
     });
 
-    document.getElementById('requestCardLink').addEventListener('click', ()=>{
+    document.getElementById('requestCardLink').addEventListener('click', () => {
       const msg = 'Olá! Gostaria de solicitar o link para presentear com cartão de crédito no valor que eu escolher.';
       const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank', 'noopener');
     });
   </script>
 </body>
+
 </html>
