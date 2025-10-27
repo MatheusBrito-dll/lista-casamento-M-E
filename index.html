@@ -344,9 +344,10 @@
       const helperText = item.small ?? `“Olá! Quero presentear vocês com o <strong>${item.nome}</strong> como forma de carinho.”`;
       const isGifted = Boolean(item.gifted);
       const thanksMessage = isGifted
-        ? `<div class="thanks">Presente dado por <strong>${item.giftedBy}</strong>. ${item.giftedThanks}</div>`
+        ? `<div class="thanks">Presente dado por <strong>${item.giftedBy}</strong>. Obrigado por fazer parte da nossa história! 💛</div>`
         : '';
       const payload = { ...item, mensagemFinal: message };
+      const priceBlock = isGifted ? '' : `<div class="price">${priceLabel}</div>`;
 
       const li = document.createElement('article');
       li.className = `card${isGifted ? ' gifted' : ''}`;
@@ -360,7 +361,7 @@
         </div>
         <div class="content">
           <div class="title">${item.nome}</div>
-          <div class="price">${priceLabel}</div>
+          ${priceBlock}
           <div class="actions">${actions}</div>
         </div>
       `;
