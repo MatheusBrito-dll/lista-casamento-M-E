@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nossa Lista de Presentes 💛</title>
+  <title>Nossa Lista de Presentes 💝</title>
   <meta name="description" content="Cada presente deixa nossa casa mais completa. Obrigado por fazer parte!">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💛</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💝</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -136,7 +136,7 @@
       <section class="intro" aria-labelledby="introTitle">
         <div class="intro__heading">
           <h1 id="introTitle" class="intro__title">Com muito carinho, preparamos nossa lista de presentes</h1>
-          <p class="intro__text">Escolha o presente que mais combina com você e ajude a montar nosso lar. É só selecionar uma opção e falar com a gente pelo WhatsApp. 💛</p>
+          <p class="intro__text">Escolha o presente que mais combina com você e ajude a montar nosso lar. É só selecionar uma opção e falar com a gente pelo WhatsApp. 💝</p>
           <a class="hero__cta" href="#lista">Ver lista completa</a>
         </div>
         <div class="gift-options" aria-label="Opções de presentes">
@@ -248,7 +248,7 @@
       { id:'tv', nome:'Smart TV 65" 4K', preco:2990.00, img:'images/TV.jpg', small:'Filmes, séries e jogos com imagem perfeita para aproveitar noites especiais juntinhos.' },
       { id:'rack', nome:'Rack Minimalista de Madeira', preco:780.00, img:'images/rack.jpg', small:'Organização e estilo para a sala, deixando tudo no lugar e com um toque acolhedor.' },
       { id:'cortina', nome:'Cortina Para Quarto ou Sala', preco:240.00, img:'images/Cortina%20Para%20Quarto%20Ou%20Sala.png', small:'Cortinas suaves para deixar os ambientes aconchegantes e com a nossa cara.' },
-      { id:'cafeteira', nome:'Cafeteira Espresso Inox', preco:420.00, img:'images/cafeteira.jpg', gifted:true, giftedBy:'Gabriel e Maria', giftedThanks:'Muito obrigado pelo presente cheio de carinho! 💛' },
+      { id:'cafeteira', nome:'Cafeteira Espresso Inox', preco:420.00, img:'images/cafeteira.jpg', gifted:true, giftedBy:'Gabriel e Maria', giftedThanks:'Muito obrigado pelo presente cheio de carinho! 💝' },
       { id:'xicara', nome:'Conjunto de Xícaras de Café', preco:150.00, img:'images/xicara.jpg', small:'Um convite a muitas conversas gostosas com café quentinho e companhia querida.' },
       { id:'kit', nome:'Kit de Ferramentas Completo', preco:280.00, img:'images/Kit-Ferramenta.jpg', small:'Perfeito para montar, ajustar e construir nossos sonhos a dois com a casa novinha.' },
       { id:'abajur', nome:'Abajures Modernos', preco:90.00, img:'images/abajures.jpg', small:'Luz suave para deixar os momentos da noite ainda mais especiais e cheios de charme.' },
@@ -261,7 +261,7 @@
         img:'images/ferro-de-passar.jpg',
         gifted:true,
         giftedBy:'Diogo e Victoria',
-        giftedThanks:'Muito obrigado pelo carinho, pelo presente e a ajuda na Lua de mel! 💛'
+        giftedThanks:'Muito obrigado pelo carinho, pelo presente e a ajuda na Lua de mel! 💝'
       },
       { id:'cama', nome:'Jogo de Cama Queen 4 Peças', preco:390.00, img:'images/jogo-cama.jpg', small:'Maciez e aconchego para descansar juntinhos e repor as energias com muito amor.' },
       { id:'panela-polishop', nome:'Panela Polishop com Tampa', preco:310.00, img:'images/Panela%20Polishop%20com%20Tampa.png', small:'Ajuda perfeita para receitas cheias de sabor e carinho no dia a dia.' },
@@ -275,7 +275,7 @@
         img:'images/panela-eletrica-de-arroz.jpg',
         gifted:true,
         giftedBy:'Aline e Dhorque',
-        giftedThanks:'Muito obrigado pelo presente cheio de carinho! 💛'
+        giftedThanks:'Muito obrigado pelo presente cheio de carinho! 💝'
       },
       { id:'fogao', nome:'Fogão 5 bocas com Forno', preco:1350.00, img:'images/fogao-5-boca.jpg', small:'Coração da cozinha para preparar refeições especiais com muito amor.' }
     ];
@@ -344,7 +344,7 @@
       const helperText = item.small ?? `“Olá! Quero presentear vocês com o <strong>${item.nome}</strong> como forma de carinho.”`;
       const isGifted = Boolean(item.gifted);
       const thanksMessage = isGifted
-        ? `<div class="thanks">Presente dado por <strong>${item.giftedBy}</strong>. Obrigado por fazer parte da nossa história! 💛</div>`
+        ? `<div class="thanks">Presente dado por <strong>${item.giftedBy}</strong>. Obrigado por fazer parte da nossa história! 💝</div>`
         : '';
       const payload = { ...item, mensagemFinal: message };
       const priceBlock = isGifted ? '' : `<div class="price">${priceLabel}</div>`;
