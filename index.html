@@ -693,7 +693,16 @@
       { id: 'cafeteira', nome: 'Cafeteira Espresso Inox', preco: 420.00, img: 'images/cafeteira.jpg', gifted: true, giftedBy: 'Gabriel e Maria', giftedThanks: 'Muito obrigado pelo presente cheio de carinho! 💝' },
       { id: 'xicara', nome: 'Conjunto de Xícaras de Café', preco: 150.00, img: 'images/xicara.jpg', small: 'Um convite a muitas conversas gostosas com café quentinho e companhia querida.' },
       { id: 'kit', nome: 'Kit de Ferramentas Completo', preco: 280.00, img: 'images/Kit-Ferramenta.jpg', small: 'Perfeito para montar, ajustar e construir nossos sonhos a dois com a casa novinha.' },
-      { id: 'abajur', nome: 'Abajures Modernos', preco: 90.00, img: 'images/abajures.jpg', small: 'Luz suave para deixar os momentos da noite ainda mais especiais e cheios de charme.' },
+      {
+        id: 'abajur',
+        nome: 'Abajures Modernos',
+        preco: 90.00,
+        img: 'images/abajures.jpg',
+        small: 'Luz suave para deixar os momentos da noite ainda mais especiais e cheios de charme.',
+        gifted: true,
+        giftedBy: 'Arthur',
+        giftedThanks: 'Muito obrigado, Arthur, pelos dois abajures! 💝'
+      },
       {
         id: 'aspirador',
         nome: 'Aspirador de Pó Robô',
@@ -806,9 +815,10 @@
       const message = `${baseMessage}\n${priceMessage}`;
       const helperText = item.small ?? `“Olá! Quero presentear vocês com o <strong>${item.nome}</strong> como forma de carinho.”`;
       const isGifted = Boolean(item.gifted);
-      const thanksMessage = isGifted
-        ? `<div class="thanks">Presente dado por <strong>${item.giftedBy}</strong>. Obrigado por fazer parte da nossa história! 💝</div>`
-        : '';
+      const thanksText = item.giftedThanks
+        ? item.giftedThanks
+        : `Presente dado por <strong>${item.giftedBy}</strong>. Obrigado por fazer parte da nossa história! 💝`;
+      const thanksMessage = isGifted ? `<div class="thanks">${thanksText}</div>` : '';
       const payload = { ...item, mensagemFinal: message };
       const priceBlock = isGifted ? '' : `<div class="price">${priceLabel}</div>`;
 
